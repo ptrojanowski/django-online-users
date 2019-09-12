@@ -1,13 +1,11 @@
-from django.utils.deprecation import MiddlewareMixin
-
 from online_users.models import OnlineUserActivity
 
 
-class OnlineNowMiddleware(MiddlewareMixin):
+class OnlineNowMiddleware(object):
     """Updates the OnlineUserActivity database whenever an authenticated user makes an HTTP request."""
 
     @staticmethod
-    def process_request(request):
+    def process_request(self, request):
         user = request.user
         if not user.is_authenticated:
             return
